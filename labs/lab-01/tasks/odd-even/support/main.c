@@ -7,7 +7,16 @@
 
 int main(void)
 {
-	/* TODO: Test functions */
-
-	return 0;
+	int i, n;
+	scanf("%d", &n);
+	int *v = (int*) malloc(sizeof(*v) * n);
+	if(!v) {
+		printf("EROARE");
+	}
+	for ( i = 0 ; i < n; i++) {
+		scanf("%d", v + i);
+	}
+	check_parity(v, n);
+	free(v);
+	return EXIT_SUCCESS;
 }

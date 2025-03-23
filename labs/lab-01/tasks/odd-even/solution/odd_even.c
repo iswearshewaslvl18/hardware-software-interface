@@ -10,7 +10,7 @@ void print_binary(int number, int nr_bits)
 {
 	int   i;
 	char *bits = malloc(sizeof(*bits) * nr_bits);
-
+	
 	if (bits == NULL) {
 		perror("malloc() failed while allocating `bits`");
 		exit(errno);
