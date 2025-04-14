@@ -3,18 +3,26 @@
 %define ARRAY_LEN 7
 
 section .data
-
 input dd 122, 184, 199, 242, 263, 845, 911
 output times ARRAY_LEN dd 0
 
 section .text
-
 extern printf
 global main
 main:
+    xor ecx, ecx
+push_array:
+    push dword [input + 4 * ecx]
+    inc ecx
+    cmp ecx, ARRAY_LEN
+    jl push_array
 
-    ; TODO push the elements of the array on the stack
-    ; TODO retrieve the elements (pop) from the stack into the output array
+    xor ecx, ecx
+pop_array:
+    pop dword [output + 4 * ecx]
+    inc ecx
+    cmp ecx, ARRAY_LEN
+    jl pop_array
 
     PRINTF32 `Reversed array: \n\x0`
     xor ecx, ecx
@@ -23,7 +31,7 @@ print_array:
     PRINTF32 `%d\n\x0`, edx
     inc ecx
     cmp ecx, ARRAY_LEN
-    jb print_array
+    jl print_array
 
     xor eax, eax
     ret
