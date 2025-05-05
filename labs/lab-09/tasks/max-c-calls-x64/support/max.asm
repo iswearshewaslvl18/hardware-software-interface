@@ -8,6 +8,8 @@ get_max:
     push rbp
     mov rbp, rsp
 
+    push rbx
+
     mov rbx, rdi ; first argument
 	mov rcx, rsi ; second argument
 

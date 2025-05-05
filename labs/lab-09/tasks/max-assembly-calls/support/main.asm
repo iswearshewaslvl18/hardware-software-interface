@@ -7,8 +7,9 @@ section .data
     arr: dd 19, 7, 129, 87, 54, 218, 67, 12, 19, 99
     len: equ $-arr
     max: dd 0
+    pos: dd 0
 
-    print_format: db "max: %u", 13, 10, 0
+    print_format: db "max: %u on position: %u", 13, 10, 0
 
 section .text
 
@@ -23,17 +24,18 @@ main:
     ; using shr 2 (shift right with 2 bits).
     mov eax, len
     shr eax, 2
-
+    push dword pos
     push eax ; length of the array
     push arr ; pointer to the array
     call get_max
     add esp, 12
 
     ; Print max.
+    push dword [pos]
     push eax
     push print_format
     call printf
-    add esp, 8
+    add esp, 12
 
     leave
     ret
