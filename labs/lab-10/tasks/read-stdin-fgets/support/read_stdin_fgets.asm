@@ -9,8 +9,8 @@
 extern printf
 extern puts
 extern strlen
-extern gets
-
+extern fgets
+extern stdin
 
 section .data
     read_message: db "insert buffer string: ", 0
@@ -44,13 +44,14 @@ main:
     add esp, 4
 
     lea ebx, [ebp - 68]
-
     ; TODO 2: Call fgets function instead of gets.
     ; HINT: fgets takes 3 arguments: buffer address, buffer size, and stdin.
     ; IMPORTANT: remember the order of arguments that have to be pushed.
+    push dword [stdin]
+    push 69
     push ebx
-    call gets
-    add esp, 4
+    call fgets
+    add esp, 12
 
     ; Push string length on the stack.
     ; String length is stored at ebp - 72.
