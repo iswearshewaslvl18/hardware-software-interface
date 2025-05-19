@@ -23,7 +23,7 @@ _start:
 
     push ecx
     push esi
-    push main
+    push my_main
     call __libc_start_main
 
     hlt
